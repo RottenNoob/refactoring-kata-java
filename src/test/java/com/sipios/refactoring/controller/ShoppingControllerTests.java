@@ -1,18 +1,36 @@
 package com.sipios.refactoring.controller;
 
 import com.sipios.refactoring.UnitTest;
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Arrays;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class ShoppingControllerTests extends UnitTest {
 
     @InjectMocks
     private ShoppingController controller;
+
+    @Before
+    public void setUp() throws Exception {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("PST"));
+
+        Date NOW = sdf.parse("2015-01-10 00:00:00");
+        mock(Date.class);
+        //TODO Current date needs to be mocked for the tests to work
+
+    }
 
     @Test
     void should_not_throw() {
@@ -139,4 +157,5 @@ class ShoppingControllerTests extends UnitTest {
         Item[] items = new Item[] {tshirt, dresses, jackets};
         return items;
     }
+
 }
